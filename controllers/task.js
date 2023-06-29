@@ -1,6 +1,6 @@
-const HttpError = require("../helpers/HttpError");
-const ctrlWrapper = require("../utils/ctrlWrapper");
-const { Task } = require("../models/task");
+import  HttpError from"../helpers/HttpError.js"
+import  ctrlWrapper from"../utils/ctrlWrapper.js"
+import  {Task} from "../models/task.js"
 
 const taskInMonth = async (req, res) => {
   const { month, year } = req.body;
@@ -10,7 +10,7 @@ const taskInMonth = async (req, res) => {
   } else {
     res.status(200).json(result);
   }
-};
+}; 
 
 const removeTask = async (req, res) => {
   const { id } = req.params;
@@ -46,7 +46,7 @@ const updateTaskById = async (req, res) => {
   res.json(result);
 };
 
-module.exports = {
+export default  {
   taskInMonth: ctrlWrapper(taskInMonth),
   removeTask: ctrlWrapper(removeTask),
   addTask: ctrlWrapper(addTask),

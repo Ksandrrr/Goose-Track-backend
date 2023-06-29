@@ -1,29 +1,8 @@
-const {Schema, model} = require("mongoose");
-const Joi = require("joi");
+import { Schema, model } from "mongoose";
+import  Joi from "joi"
 
-const handleMongooseError = require("../helpers/handleMongooseError");
+import handleMongooseError from "../helpers/handleMongooseError.js"
 
-// const userSchema = new Schema({
-//   password: {
-//     type: String,
-//     required: [true, 'Set password for user'],
-//   },
-//   email: {
-//     type: String,
-//     required: [true, 'Email is required'],
-//     unique: true,
-//   },
-//   token: String,
-//   verify: {
-//     type: Boolean,
-//     default: false,
-//   },
-//   verificationToken: {
-//     type: String,
-//     required: [true, 'Verify token is required'],
-//   },
-
-// },  { versionKey: false, timestamps: true });
 const userSchema = new Schema(
   {
     password: {
@@ -90,8 +69,5 @@ const schemas = {
 
 const User = model("user", userSchema);
 
-module.exports = {
-    User,
-    schemas,
-}
+export {User,schemas}
 

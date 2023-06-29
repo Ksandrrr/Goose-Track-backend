@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+import { Schema, model } from "mongoose";
+import  Joi from "joi"
 
-const HttpError = require("../helpers/HttpError");
+import handleMongooseError from "../helpers/handleMongooseError.js"
 
 const reviewsSchema = new Schema(
   {
@@ -38,11 +38,11 @@ const reviewsAddSchema = Joi.object({
 
 });
 
-reviewsSchema.post("save", HttpError);
+reviewsSchema.post("save", handleMongooseError);
 
 const Reviews = model("reviews", reviewsSchema);
 
-module.exports = {
+export  {
   reviewsAddSchema,
   Reviews,
 };

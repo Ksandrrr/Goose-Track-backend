@@ -1,12 +1,12 @@
-const express = require("express");
+import  express from 'express'
 
-const authController = require("../../controllers/auth");
+import authController from"../../controllers/auth.js"
 
-const authenticate = require("../../middlewares/authenticate")
+import authenticate from "../../middlewares/authenticate.js"
 
-const validateBody = require("../../utils/validateBody")
+import validateBody from "../../utils/validateBody.js"
 
-const {schemas} = require("../../models/auth");
+import {schemas} from "../../models/auth.js";
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.get("/current", authenticate, authController.getCurrent);
 
 router.post("/logout", authenticate, authController.logout);
 
-module.exports = router;
+export default router;

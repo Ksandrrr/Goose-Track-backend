@@ -1,10 +1,10 @@
-const express = require('express')
-const logger = require('morgan')
-const cors = require('cors')
-require("dotenv").config()
-const taskRouter = require('./routes/api/task')
-const authRouter = require('./routes/api/auth')
-const reviewsRouter = require('./routes/api/reviews')
+import express from 'express'
+import logger  from 'morgan'
+import cors from 'cors'
+import "dotenv/config.js";
+import taskRouter from "./routes/api/task.js"
+import authRouter from './routes/api/auth.js'
+import reviewsRouter from './routes/api/reviews.js'
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
@@ -26,5 +26,5 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message })
 })
 
-module.exports = app
+export default app
 

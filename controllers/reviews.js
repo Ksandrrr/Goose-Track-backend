@@ -1,6 +1,6 @@
-const HttpError = require("../helpers/HttpError");
-const ctrlWrapper = require("../utils/ctrlWrapper");
-const { Reviews } = require("../models/reviews");
+import  HttpError from"../helpers/HttpError.js"
+import ctrlWrapper from "../utils/ctrlWrapper.js"
+import {Reviews} from "../models/reviews.js"
 
 
 const listReviews = async (req, res) => {
@@ -63,7 +63,7 @@ const updateReviewsById = async (req, res) => {
   res.json(result);  
 };
 
-module.exports = {
+export default {
     listReviews: ctrlWrapper(listReviews),
     myReviews: ctrlWrapper(myReviews),
   removeReviews: ctrlWrapper(removeReviews),

@@ -1,14 +1,14 @@
-const express = require("express");
+import  express from 'express'
 
-const controllersReviews = require("../../controllers/reviews");
+import controllersReviews from "../../controllers/reviews.js"
 
-const authenticate = require("../../middlewares/authenticate")
+import authenticate from "../../middlewares/authenticate.js"
 
-const validateBody = require("../../utils/validateBody")
+import validateBody from "../../utils/validateBody.js"
 
-const isValideId = require("../../middlewares/isValideId")
+import isValideId from "../../middlewares/isValideId.js"
 
-const schemas = require("../../models/reviews");
+import {reviewsAddSchema} from "../../models/reviews.js";
 
 const router = express.Router();
 
@@ -17,10 +17,10 @@ router.get("/", controllersReviews.listReviews);
 
 router.get("/own", authenticate, controllersReviews.myReviews);
  
-router.post("/own", authenticate, validateBody(schemas.reviewsAddSchema), controllersReviews.addReviews);
+router.post("/own", authenticate, validateBody(reviewsAddSchema), controllersReviews.addReviews);
 
 router.patch("/own/:id", authenticate, controllersReviews.updateReviewsById);
 
 router.delete("/own/:id", authenticate, isValideId, controllersReviews.removeReviews);
 
-module.exports = router; 
+export default router; 

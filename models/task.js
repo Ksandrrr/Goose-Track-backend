@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+import { Schema, model } from "mongoose";
+import  Joi from "joi"
 
-const HttpError = require("../helpers/HttpError");
+import handleMongooseError from "../helpers/handleMongooseError.js"
 
 const taskSchema = new Schema(
   {
@@ -59,11 +59,8 @@ const taskAddSchema = Joi.object({
   }),
 });
 
-taskSchema.post("save", HttpError);
+taskSchema.post("save", handleMongooseError);
 
 const Task = model("task", taskSchema);
 
-module.exports = {
-  taskAddSchema,
-  Task,
-};
+export {taskAddSchema, Task}

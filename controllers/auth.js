@@ -1,12 +1,12 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const gravatar = require("gravatar");
+import bcrypt from "bcrypt"
+import  jwt from "jsonwebtoken"
+import gravatar from "gravatar"
 
-const { User } = require("../models/auth");
+import {User} from "../models/auth.js"
 
-const ctrlWrapper = require("../utils/ctrlWrapper")
+import ctrlWrapper from "../utils/ctrlWrapper.js"
 
-const HttpError = require("../helpers/HttpError");
+import  HttpError from "../helpers/HttpError.js"
 
 const { SECRET_KEY } = process.env;
 
@@ -93,7 +93,7 @@ const logout = async(req, res)=> {
     })
 }
 
-module.exports = {
+export default  {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
     getCurrent: ctrlWrapper(getCurrent),

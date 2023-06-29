@@ -1,22 +1,22 @@
-const express = require('express')
-const controllersTask = require("../../controllers/task")
-const router = express.Router()
-const schemas = require("../../models/task");
-const validateBody = require("../../utils/validateBody")
-const isValideId = require("../../middlewares/isValideId")
+import  express from 'express'
+import controllersTask from "../../controllers/task.js"
+import {taskAddSchema} from "../../models/task.js"
+import validateBody from "../../utils/validateBody.js"
+import isValideId  from "../../middlewares/isValideId.js"
+import authenticate from "../../middlewares/authenticate.js"
 
-const authenticate = require("../../middlewares/authenticate")
+const router = express.Router();
 
 router.use(authenticate);
 
-
+ 
 router.get('/TaskInMonth', controllersTask.taskInMonth)
 
-router.post('/addTask', validateBody(schemas.taskAddSchema), controllersTask.addTask)
+router.post('/addTask', validateBody(taskAddSchema), controllersTask.addTask)
 
 router.put('/:id',isValideId, controllersTask.updateTaskById)
 
 router.delete('/:id',isValideId, controllersTask.removeTask)
 
  
-module.exports = router
+export default router
