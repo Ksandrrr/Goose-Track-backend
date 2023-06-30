@@ -10,6 +10,29 @@ import  HttpError from "../helpers/HttpError.js"
 
 const { SECRET_KEY } = process.env;
 
+// async function register(req, res) {
+//   const { email, password } = req.body;
+//   const user = await User.findOne({ email });
+
+//   if (user) {
+//     throw HttpError(409, "Email in use");
+//   }
+
+//   const hashedPassword = bcrypt.hashSync(password, 10);
+
+//   const avatarURL = gravatar.url(email, { size: 250 });
+
+//   const newUser = await User.create({
+//     ...req.body,
+//     avatarURL,
+//     password: hashedPassword,
+//   });
+
+//   res.status(201).json({
+//     name: newUser.name,
+//     email: newUser.email
+//   });
+// }
 async function register(req, res) {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -19,7 +42,6 @@ async function register(req, res) {
   }
 
   const hashedPassword = bcrypt.hashSync(password, 10);
-
   const avatarURL = gravatar.url(email, { size: 250 });
 
   const newUser = await User.create({
@@ -28,9 +50,21 @@ async function register(req, res) {
     password: hashedPassword,
   });
 
-  res.status(201).json({ name: newUser.name, email: newUser.email});
-}
+  const payload = {
+    id: newUser._id,
+  };
 
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+  await User.findByIdAndUpdate(newUser._id, { token });
+
+  res.status(201).json({
+    token,
+    user: {
+      email: newUser.email,
+      name: newUser.name,
+    }
+  });
+}
 const updateUserInfo = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate( req.user._id, { ...req.body }, { new: true });
   res.json({
@@ -59,7 +93,7 @@ const login = async(req, res)=> {
     }
 
     const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
-     await User.findByIdAndUpdate(user._id, { token })
+    await User.findByIdAndUpdate(user._id, { token })
     
     res.json({
         token,
