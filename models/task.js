@@ -1,8 +1,7 @@
 import { Schema, model } from "mongoose";
-import  Joi from "joi"
+import Joi from "joi";
 
-import handleMongooseError from "../helpers/HandleMongooseError.js"
-
+import handleMongooseError from "../helpers/HandleMongooseError.js";
 
 const taskSchema = new Schema(
   {
@@ -22,13 +21,21 @@ const taskSchema = new Schema(
       type: String,
       required: [true, "Set priority for task"],
     },
+    progress: {
+      type: String,
+      required: [true, "Set progress for task"],
+    },
+    day: {
+      type: String,
+      required: [true, "Set month for task"],
+    },
     month: {
       type: String,
       required: [true, "Set month for task"],
     },
     year: {
       type: String,
-      required: [true, "Set month for task"],
+      required: [true, "Set year for task"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -52,10 +59,16 @@ const taskAddSchema = Joi.object({
   priority: Joi.string().required().messages({
     "any.required": `"missing required priority field"`,
   }),
-   month: Joi.string().required().messages({
+  progress: Joi.string().required().messages({
+    "any.required": `"missing required progress field"`,
+  }),
+  day: Joi.string().required().messages({
+    "any.required": `"missing required day field"`,
+  }),
+  month: Joi.string().required().messages({
     "any.required": `"missing required month field"`,
   }),
-   year: Joi.string().required().messages({
+  year: Joi.string().required().messages({
     "any.required": `"missing required year field"`,
   }),
 });
@@ -64,4 +77,4 @@ taskSchema.post("save", handleMongooseError);
 
 const Task = model("task", taskSchema);
 
-export {taskAddSchema, Task}
+export { taskAddSchema, Task };
