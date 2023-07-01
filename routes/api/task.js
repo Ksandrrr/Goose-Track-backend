@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(authenticate);
 
  
-router.get('/TaskInMonth', validateBody(getTaskSchema), controllersTask.taskInMonth)
+router.post('/TaskInMonth', validateBody(getTaskSchema), controllersTask.taskInMonth)
 
 router.post('/addTask', validateBody(taskAddSchema), controllersTask.addTask)
 
