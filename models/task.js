@@ -45,7 +45,14 @@ const taskSchema = new Schema(
   },
   { versionKey: false }
 );
-
+const getTaskSchema = Joi.object({
+  month: Joi.string().required().messages({
+    "any.required": `"missing required month field"`,
+  }),
+  year: Joi.string().required().messages({
+    "any.required": `"missing required year field"`,
+  }),
+});
 const taskAddSchema = Joi.object({
   title: Joi.string().required().messages({
     "any.required": `"missing required name field"`,
@@ -77,4 +84,4 @@ taskSchema.post("save", handleMongooseError);
 
 const Task = model("task", taskSchema);
 
-export { taskAddSchema, Task };
+export {getTaskSchema, taskAddSchema, Task };

@@ -18,7 +18,7 @@ app.use("/users", authRouter)
 app.use('/api/task', taskRouter)
 
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' })
+  res.status(404).json({ message: 'Rout Not found' })
 })
 
 app.use((err, req, res, next) => {
