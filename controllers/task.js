@@ -4,7 +4,8 @@ import  {Task} from "../models/task.js"
 
 const taskInMonth = async (req, res) => {
   const { month, year } = req.body;
-  const result = await Task.find({ month: month, year: year });
+  const { _id: owner } = req.user;
+  const result = await Task.find({ month: month, year: year,owner });
   if (result.length === 0) {
     throw HttpError(404, `Not found`);
   } else {
