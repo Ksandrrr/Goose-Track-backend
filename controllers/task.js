@@ -22,7 +22,7 @@ const removeTask = async (req, res) => {
       return res.status(404).json({ message: `Task not found` });
     }
 
-    res.json({ message: "Task deleted" });
+    res.json({ message: id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
