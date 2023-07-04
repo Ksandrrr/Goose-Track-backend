@@ -88,11 +88,10 @@ const login = async(req, res)=> {
 }
 
 const getCurrent = async(req, res)=> {
-   const {email, subscription} = req.user;
+   const {name, email,token,avatarURL,birthday,phone,skype} = req.user;
 
     res.json({
-        email,
-        subscription,
+        name, email,token,avatarURL,birthday,phone,skype
     })
 }
 
