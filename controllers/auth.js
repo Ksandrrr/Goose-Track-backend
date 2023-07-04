@@ -94,7 +94,7 @@ const getCurrent = async (req, res) => {
 
   res.json({
     token,
-    user: { name, email, token, avatarURL, birthday, phone, skype },
+    user: { name, email, avatarURL, birthday, phone, skype },
   });
 };
 
