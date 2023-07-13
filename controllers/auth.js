@@ -106,11 +106,16 @@ const logout = async (req, res) => {
     message: "Logout success",
   });
 };
-
+const updateAvatar  = async (req, res) => {
+  const avatarURL = req.file.path;
+  await User.findByIdAndUpdate(req.user._id, { avatarURL });
+  res.json({ avatarURL });
+}
 export default {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
   updateUserInfo: ctrlWrapper(updateUserInfo),
+  updateAvatar: ctrlWrapper(updateAvatar),
 };

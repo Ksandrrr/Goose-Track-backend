@@ -53,7 +53,6 @@ const userUpdateSchema = Joi.object({
     phone: Joi.string(),
     skype: Joi.string(),
     email: Joi.string(),
-    avatarURL: Joi.string(),
 });
 const userLoginSchema = Joi.object({
     email: Joi.string().required(),
@@ -64,7 +63,6 @@ const schemas = {
   userRegisterSchema,
   userUpdateSchema,
   userLoginSchema,
-    
 };
 
 const User = model("user", userSchema);

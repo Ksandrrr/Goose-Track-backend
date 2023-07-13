@@ -7,13 +7,15 @@ import authenticate from "../../middlewares/authenticate.js"
 import validateBody from "../../utils/validateBody.js"
 
 import {schemas} from "../../models/auth.js";
-
+import uploadCloud  from "../../middlewares/uploadCloud.js"
 const router = express.Router();
 
   
 router.post("/register", validateBody(schemas.userRegisterSchema), authController.register);
 
 router.patch("/me", authenticate, validateBody(schemas.userUpdateSchema), authController.updateUserInfo);
+
+router.patch("/avatars", authenticate, uploadCloud.single("avatar"), authController.updateAvatar);
 
 router.post("/login", validateBody(schemas.userLoginSchema), authController.login);
 
